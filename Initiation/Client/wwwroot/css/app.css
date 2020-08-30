@@ -1,0 +1,37 @@
+﻿
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+.valid.modified:not([type=checkbox]) {
+    border-color: hsl(171, 100%, 41%);
+}
+
+.invalid {
+    border-color: hsl(348, 86%, 61%);
+}
+
+.validation-message {
+    color: hsl(348, 86%, 61%);
+}
+
+/*Alertify - Bulma*/
+
+.alertify-notifier .ajs-message .ajs-sucess {
+    color: #fff;
+    background: hsl(171, 100%, 41%);
+}
+
+.alertify-notifier .ajs-message .ajs-error {
+    color: #fff;
+    background: hsl(348, 86%, 61%);
+}
+
+.alertify-notifier .ajs-message .ajs-warning {
+    color: hsl(48, 100%, 67%);
+    background: #999;
+}
+
+

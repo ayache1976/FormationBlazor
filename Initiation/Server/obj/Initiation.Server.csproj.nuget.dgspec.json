@@ -1,0 +1,285 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Server\\Initiation.Server.csproj": {}
+  },
+  "projects": {
+    "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Client\\Initiation.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Client\\Initiation.Client.csproj",
+        "projectName": "Initiation.Client",
+        "projectPath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Client\\Initiation.Client.csproj",
+        "packagesPath": "C:\\Users\\Charef\\.nuget\\packages\\",
+        "outputPath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Charef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.devexpress.com/JrqhhNwXnVUfwEgKpcOsdh9hawlBdHgjE3RVYciDwweIjC8Ugf/api": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Shared\\Initiation.Shared.csproj": {
+                "projectPath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Shared\\Initiation.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "AlertifyJS": {
+              "target": "Package",
+              "version": "[1.13.1, )"
+            },
+            "Cloudcrate.AspNetCore.Blazor.Browser.Storage": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.Build": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Microsoft.AspNetCore.WebUtilities": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.Net.Http.Json": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Server\\Initiation.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Server\\Initiation.Server.csproj",
+        "projectName": "Initiation.Server",
+        "projectPath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Server\\Initiation.Server.csproj",
+        "packagesPath": "C:\\Users\\Charef\\.nuget\\packages\\",
+        "outputPath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Charef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.devexpress.com/JrqhhNwXnVUfwEgKpcOsdh9hawlBdHgjE3RVYciDwweIjC8Ugf/api": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Client\\Initiation.Client.csproj": {
+                "projectPath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Client\\Initiation.Client.csproj"
+              },
+              "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Shared\\Initiation.Shared.csproj": {
+                "projectPath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Shared\\Initiation.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.AspNetCore.Authorization": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.Server": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.7.1, )"
+            },
+            "NSwag.AspNetCore": {
+              "target": "Package",
+              "version": "[13.7.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.7.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Shared\\Initiation.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Shared\\Initiation.Shared.csproj",
+        "projectName": "Initiation.Shared",
+        "projectPath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Shared\\Initiation.Shared.csproj",
+        "packagesPath": "C:\\Users\\Charef\\.nuget\\packages\\",
+        "outputPath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Charef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.devexpress.com/JrqhhNwXnVUfwEgKpcOsdh9hawlBdHgjE3RVYciDwweIjC8Ugf/api": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "System.ComponentModel": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+﻿<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    @if (HasPrevious)
+    {
+        <a class="pagination-previous" @onclick="@(async ()=> await PagerButtonClicked(CurrentPage - 1))">Précédent</a>
+    }
+    else
+    {
+        <a class="pagination-previous" disabled>Précédent</a>
+    }    
+    
+    @if (HasNext)
+    {
+        <a class="pagination-next" @onclick="@(async ()=> await PagerButtonClicked(CurrentPage + 1))">Suivant</a>
+    }
+    else
+    {
+        <a class="pagination-next" disabled>Suivant</a>
+    }
+<ul class="pagination-list">
+    @if (ShowPageNumbers)
+    {
+        @for (var i = Start; i <= Finish; i++)
+        {
+            var currentIndex = i;
+            if (i == CurrentPage)
+            {
+                <li><a class="pagination-link is-current" aria-current="page">@i</a></li>
+            }
+            else
+            {
+                <li><a class="pagination-link"  aria-label="Aller à la page @currentIndex" @onclick="async ()=> await PagerButtonClicked(currentIndex)">@currentIndex</a></li>
+            }
+        }
+    }
+</ul>
+</nav>
+
+@code {
+    [Parameter]
+    public int PageCount { get; set; }
+
+    [Parameter]
+    public int CurrentPage { get; set; }
+
+    [Parameter]
+    public Func<int,Task> OnPageChanged { get; set; }
+
+    [Parameter]
+    public bool ShowPageNumbers { get; set; } = true;
+
+    [Parameter]
+    public int VisiblePages { get; set; } = 5;
+
+    [Parameter]
+    public int Start { get; set; }
+
+    [Parameter]
+    public int Finish { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        var half = (int)Math.Floor(VisiblePages / 2d);
+        Start = Math.Max(CurrentPage - half, 1);
+        Finish = Math.Min(CurrentPage + half, PageCount);
+        VisiblePages = Math.Min(VisiblePages, PageCount);
+        if(Start == 1)
+        {
+            Finish = VisiblePages;
+        }
+        if(Finish >= PageCount)
+        {
+            Start = PageCount - VisiblePages + 1;
+        }
+        base.OnParametersSet();
+    }
+
+    private bool HasPrevious => CurrentPage > 1 && PageCount > 1;
+    private bool HasNext => CurrentPage < PageCount;
+
+    private async Task PagerButtonClicked(int page)
+    {
+        await OnPageChanged?.Invoke(page);
+    }
+
+}

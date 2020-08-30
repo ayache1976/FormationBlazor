@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "Guitare",
+    "Strings": 6,
+    "YearManufacture": 1680
+  },
+  {
+    "Name": "Guitare électrique",
+    "Strings": 6,
+    "YearManufacture": 1930
+  },
+  {
+    "Name": "Ukulélé",
+    "Strings": 4,
+    "YearManufacture": 1880
+  },
+  {
+    "Name": "Basse électrique",
+    "Strings": 4,
+    "YearManufacture": 1933
+  },
+  {
+    "Name": "Oud",
+    "Strings": 12,
+    "YearManufacture": -1880
+  },
+  {
+    "Name": "La harpe chromatique",
+    "Strings": 61,
+    "YearManufacture": 1894
+  }
+]

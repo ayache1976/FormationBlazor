@@ -1,0 +1,90 @@
+﻿@page "/login"
+@inject LocalStorage   Storage
+@inject NavigationManager MyNavigationManager
+@inject IHttpUserService HttpUserService
+@inject IJsAlertifyService JsAlertifyService
+
+
+@using Initiation.Shared.Dto
+@using Microsoft.AspNetCore.WebUtilities
+@using System.Net
+@using Newtonsoft.Json
+@using Initiation.Client.Services.Http
+@using Initiation.Client.Services.Js
+@using Initiation.Client.Helpers
+@using System.Globalization
+@using Cloudcrate.AspNetCore.Blazor.Browser.Storage
+
+
+<NavBarTop></NavBarTop>
+
+<h1 class="title is-3 mx-4">Se connecter</h1>
+
+<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    @if(InvalidCredentialsText != "")
+    {
+        <ul class="validation-errors">
+            <li class="validation-message">@InvalidCredentialsText</li>
+        </ul>
+    }
+    <div class="field ">
+        <div class="control is-center mx-4">
+            <label class="label">Nome d'utilisateur</label>
+        </div>
+        <div class="control has-icons-left is-center mx-4">
+            <MyInputrazor Type="Text" @bind-Value="model.UserName" Class="input" AutoComplete="username" />
+            <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+            </span>
+        </div>
+        <p class="help is-danger"><ValidationMessage For="@(() => model.UserName)" /></p>
+    </div>
+
+    <div class="field">
+        <div class="control is-center mx-4">
+            <label class="label">Mot de passe</label>
+        </div>
+
+        <div class="control has-icons-left  is-center mx-4">
+            <MyInputrazor Type="password" @bind-Value="model.Password" Class="input" AutoComplete="current-password" />
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+        </div>
+        <p class="help is-danger"><ValidationMessage For="@(() => model.Password)" /></p>
+    </div>
+
+    <div class="field">
+        <p class="control mx-4">
+            <button type="submit" class="button is-primary">Se connecter</button>
+        </p>
+    </div>
+</EditForm>
+@code {
+    private DtoUser model = new DtoUser();
+
+    private static TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+    private string InvalidCredentialsText = "";
+
+    private async void HandleValidSubmit()
+    {
+        InvalidCredentialsText = "";
+        var response = await HttpUserService.PostLogin(model);
+        switch (response.StatusCode)
+        {
+            case HttpStatusCode.OK:
+                await JsAlertifyService.Open($"Bienvenue {textInfo.ToTitleCase(model.UserName)} ", TypeAlertify.Success);
+                MyNavigationManager.NavigateTo("/");
+                break;
+            case HttpStatusCode.Unauthorized:
+                InvalidCredentialsText = await response.Content.ReadAsStringAsync();
+                await JsAlertifyService.Open($"L'utilisateur {textInfo.ToTitleCase(model.UserName)} non autorisé: InvalidCredentialsText ", TypeAlertify.Success);
+                break;
+        }
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,22 @@
+﻿<h3>Up/Down Counter</h3>
+
+<input type="button" value="Previous" @onclick="@Previous" />
+<input type="button" value="Next" @onclick="@Next" />
+
+@code {
+    [Parameter]
+    public int Counter { get; set; }
+
+    [Parameter]
+    public Action<int> CounterChanged { get; set; }
+
+    void Next()
+    {
+        CounterChanged(++Counter);
+    }
+
+    void Previous()
+    {
+        CounterChanged(--Counter);
+    }
+}

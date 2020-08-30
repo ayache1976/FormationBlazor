@@ -1,0 +1,101 @@
+﻿@page "/instruments"
+@inject NavigationManager MyNavigationManager
+@inject IHttpInstrumentService HttpInstrumentService
+@inject IJsAlertifyService JsAlertifyService
+@using Microsoft.AspNetCore.WebUtilities
+@using System.Net
+@using Newtonsoft.Json
+@using Initiation.Client.Services.Http
+@using Initiation.Client.Services.Js
+@using Initiation.Client.Helpers
+@using Initiation.Shared.Helpers
+@using Initiation.Shared.Dto
+
+<NavBarTop></NavBarTop>
+
+<h1 class="title">La Liste des Instruments</h1>
+
+<p>Cette page affiche les instruments</p>
+
+
+@if (items == null)
+{
+    <p>
+        <em>Loading....</em>
+    </p>
+}
+else
+{
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Nombre de cordes</th>
+                <th>YearManufacture</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in items)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Strings</td>
+                    <td>@item.YearManufacture</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <BulmaPagination PageCount="@pagination.TotalPages" CurrentPage="@pagination.CurrentPage" OnPageChanged="@OnPageChange"></BulmaPagination>
+}
+
+@code {
+    DtoInstrument[] items;
+    PaginationHeader pagination = new PaginationHeader();
+    string pageQuery { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        RefreshTypes();
+        MyNavigationManager.LocationChanged += OnLocationChanges;
+        await LoadDatas(int.Parse(pageQuery) > 0 ? int.Parse(pageQuery) : 1);
+        StateHasChanged();
+    }
+
+    private void OnLocationChanges(object sender, LocationChangedEventArgs e) => RefreshTypes();
+
+    private void RefreshTypes()
+    {
+        var uri = new Uri(MyNavigationManager.Uri);
+        pageQuery = QueryHelpers.ParseQuery(uri.Query).TryGetValue("page", out var page) ? page.First() : "";
+        if (pageQuery == "")
+        {
+            pageQuery = "1";
+        }
+        StateHasChanged();
+    }
+    private async Task OnPageChange(int page)
+    {
+        await LoadDatas(page);
+        StateHasChanged();
+    }
+
+    private async Task LoadDatas(int page)
+    {
+        var response = await HttpInstrumentService.GetInstrumentsPaged(page);
+        switch (response.StatusCode)
+        {
+            case HttpStatusCode.OK:
+                string content = await response.Content.ReadAsStringAsync();
+                items = JsonConvert.DeserializeObject<DtoInstrument[]>(content);
+                var head = response.Headers.GetValues("Pagination");
+                pagination = JsonConvert.DeserializeObject<PaginationHeader>(head.FirstOrDefault());
+                break;
+            default:
+                await JsAlertifyService.Open($"Erreur lors du chargement des intruments", TypeAlertify.Error);
+                MyNavigationManager.NavigateTo("/");
+                break;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "BZT/K11j+0AL62SCy1jCBJtY5byz6WJYiIN2PexnbiYq9UB2+EqswhQJ9mejRPZgUKRS65a/bTcl9Dy7z52NAQ==",
+  "success": true,
+  "projectFilePath": "F:\\Dev\\Source\\Repos\\BlazorInitiation\\Initiation\\Initiation\\Shared\\Initiation.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Charef\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Charef\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\Charef\\.nuget\\packages\\system.componentmodel\\4.3.0\\system.componentmodel.4.3.0.nupkg.sha512",
+    "C:\\Users\\Charef\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
+    "C:\\Users\\Charef\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

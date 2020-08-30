@@ -1,0 +1,86 @@
+﻿@using Cloudcrate.AspNetCore.Blazor.Browser.Storage
+@using System.Globalization
+
+@inject NavigationManager MyNavigationManager
+@inject LocalStorage Storage
+@inject IJSRuntime JSRuntime
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="https://microsoft.com">
+            <img src="https://docs.microsoft.com/fr-fr/learn/tv/media/blazor-logo.png" width="60" height="28">
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @onclick="@ToogleNavBar">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu @toogleClass">
+        <div class="navbar-start">
+            <a class="navbar-item">
+                Home
+            </a>
+
+
+            @if (Storage["token"] != null && Storage["username"] != null)
+            {
+                <a class="navbar-item" href="/instruments">
+                    List des Instruments
+                </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        @textInfo.ToTitleCase(Storage["username"]);
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            Sous-menu
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" @onclick="@Logout">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+        @if (Storage["token"] == null || Storage["username"] == null)
+        {
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary" href="\signup">
+                            <strong>S'inscrire</strong>
+                        </a>
+                        <a class="button is-light" href="\login">
+                            Se connecter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</nav>
+
+@code {
+    string toogleClass = "";
+    private static TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+    void ToogleNavBar()
+    {
+        if (toogleClass == "")
+            toogleClass = "is-active";
+        else
+            toogleClass = "";
+    }
+
+    async void Logout()
+    {
+        Storage.RemoveItem("username");
+        Storage.RemoveItem("token"); 
+        MyNavigationManager.NavigateTo("/");
+        await JSRuntime.InvokeAsync<bool>("Refresh");
+    }
+}

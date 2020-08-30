@@ -1,0 +1,21 @@
+﻿@inherits InputBase<string>
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components
+
+
+<input @bind="@CurrentValue"  autocomplete="@AutoComplete" type="@Type" class="@CssClass"/>
+
+@code {
+    [Parameter]
+    public string AutoComplete { get; set; }
+
+    [Parameter]
+    public string Type { get; set; }
+
+    protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage)
+    {
+        result = value;
+        validationErrorMessage = null;
+        return true;
+    }
+}

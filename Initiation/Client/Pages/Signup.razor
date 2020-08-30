@@ -1,0 +1,132 @@
+﻿@page "/signup"
+@inject LocalStorage   Storage
+@inject NavigationManager MyNavigationManager
+@inject IHttpUserService HttpUserService
+@inject IJsAlertifyService JsAlertifyService
+
+
+@using Initiation.Shared.Dto
+@using Microsoft.AspNetCore.WebUtilities
+@using System.Net
+@using Newtonsoft.Json
+@using Initiation.Client.Services.Http
+@using Initiation.Client.Services.Js
+@using Initiation.Client.Helpers
+@using System.Globalization
+@using Cloudcrate.AspNetCore.Blazor.Browser.Storage
+
+<NavBarTop></NavBarTop>
+
+<h1 class="title is-3 mx-4">S'inscrire</h1>
+
+
+<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    @*<InputText id="name" @bind-Value="exampleModel.Name" />*@
+    <div class="field ">
+        <div class="control is-center mx-4">
+            <label class="label">Nome d'utilisateur</label>
+         </div>
+        <div class="control has-icons-left has-icons-right  is-center mx-4">
+            <MyInputrazor Type="Text" @bind-Value="model.UserName" Class="input" AutoComplete="username"  />
+
+            @*<input class="input is-success" type="text" placeholder="Text input" value="bulma">*@
+            <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+            </span>
+            @if (swAvailable.HasValue && swAvailable.Value)
+            {
+                <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                </span>
+            }
+            @if (swAvailable.HasValue && swAvailable.Value)
+            {
+                <p class="help is-success">Ce nom d'utilisateur est disponible</p>
+            }           
+            @if (swAvailable.HasValue && !swAvailable.Value)
+            {
+                <p class="help is-danger">Ce nom d'utilisateur existe deja !!</p>
+            }
+            @*<span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+        </span>*@
+        </div>
+        <p class="help is-danger"><ValidationMessage For="@(() => model.UserName)" /></p>
+    </div>
+
+    <div class="field">
+        <div class="control is-center mx-4">
+            <label class="label">Mot de passe</label>
+        </div>
+        
+        <div class="control has-icons-left  is-center mx-4">
+            <MyInputrazor Type="password" @bind-Value="model.Password" Class="input" AutoComplete="current-password" />
+
+            @*<input class="input is-danger" type="email" placeholder="Email input" value="hello@">*@
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+            @*<span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+            </span>*@
+        </div>
+        <p class="help is-danger"><ValidationMessage For="@(() => model.Password)" /></p>
+
+    </div>
+
+    <div class="field">
+        <p class="control mx-4">
+            <button type="submit" class="button is-primary">S'inscrire</button>
+        </p>
+    </div>
+</EditForm>
+
+@code {
+    private DtoUser model = new DtoUser();
+
+    private static System.Globalization.TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+    private bool? swAvailable = null;
+
+    private async Task HandleValidSubmit()
+    {
+        var response = await HttpUserService.PostRegister(model);
+        switch (response.StatusCode)
+        {
+            case HttpStatusCode.OK:
+                await JsAlertifyService.Open($"Utilisateur &laquo; {textInfo.ToTitleCase(model.UserName)} &raquo; cr&eacute;e", TypeAlertify.Success);
+                MyNavigationManager.NavigateTo("/");
+                break;
+            default:
+                await JsAlertifyService.Open($"Erreur de creation de l'utilisateur : { await response.Content.ReadAsStringAsync()}", TypeAlertify.Error);
+                break;
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        model.ValueChanged += CheckIfUserNameAvailableEvent;
+        if (Storage["token"] != null || Storage["username"] != null)
+            MyNavigationManager.NavigateTo("/");
+    }
+
+    public async void CheckIfUserNameAvailableEvent(object sender, EventArgs e)
+    {
+        if(string.IsNullOrEmpty(model.UserName))
+            swAvailable = null;
+        else
+        {
+            var dtoAvailable = new DtoUserForLogin
+            {
+                UserName = model.UserName
+            };
+            swAvailable = await HttpUserService.PostAvailable(dtoAvailable);
+        }
+
+        StateHasChanged();
+    }
+}
+
+
